@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Manu — A Little Warmth For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #fdf8f3;
+      --bg-peach: #f9ece1;
+      --card-bg: #fffdfb;
+      --terracotta: #c86d51;
+      --terracotta-dark: #a8543b;
+      --amber: #e29d5c;
+      --text-main: #3c2f2f;
+      --text-muted: #76645e;
+      --border-soft: rgba(200, 109, 81, 0.16);
+      --shadow-warm: 0 12px 35px rgba(140, 82, 58, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(160deg, var(--bg-cream) 0%, var(--bg-peach) 50%, #f5e2d3 100%);
+      color: var(--text-main);
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Floating Bokeh Lights */
+    .bokeh-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(226, 157, 92, 0.25) 0%, rgba(200, 109, 81, 0) 70%);
+      animation: floatSlow 14s infinite ease-in-out alternate;
+    }
+
+    .bokeh:nth-child(1) { width: 320px; height: 320px; top: -60px; left: -80px; animation-duration: 16s; }
+    .bokeh:nth-child(2) { width: 260px; height: 260px; top: 35%; right: -70px; animation-duration: 19s; animation-delay: -4s; }
+    .bokeh:nth-child(3) { width: 380px; height: 380px; bottom: -100px; left: 15%; animation-duration: 21s; animation-delay: -7s; }
+
+    @keyframes floatSlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, -30px) scale(1.08); }
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      padding: 96px 0 64px;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(200, 109, 81, 0.12);
+      color: var(--terracotta-dark);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+
+    .scroll-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terracotta);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(200, 109, 81, 0.25);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .scroll-btn:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 1.75rem;
+      text-align: center;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 32px;
+    }
+
+    /* Letter Card */
+    .letter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 24px;
+      padding: clamp(28px, 5vw, 52px);
+      box-shadow: var(--shadow-warm);
+      position: relative;
+    }
+
+    .letter-card::before {
+      content: "“";
+      font-family: 'Lora', serif;
+      font-size: 5rem;
+      color: rgba(200, 109, 81, 0.15);
+      position: absolute;
+      top: 10px;
+      left: 24px;
+      line-height: 1;
+    }
+
+    .letter-greeting {
+      font-family: 'Lora', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--terracotta);
+      margin-bottom: 20px;
+    }
+
+    .letter-body p {
+      margin-bottom: 18px;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .letter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, rgba(226, 157, 92, 0.22) 0%, rgba(226, 157, 92, 0.22) 100%);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* Signature Styling */
+    .signature-block {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px dashed rgba(200, 109, 81, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .signature-closing {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .signature-name {
+      font-family: 'Caveat', cursive;
+      font-size: 2.35rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      line-height: 1.1;
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    /* Reminder Flip Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .flip-card {
+      background: transparent;
+      height: 210px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-warm);
+      border: 1px solid var(--border-soft);
+    }
+
+    .flip-front {
+      background: var(--card-bg);
+    }
+
+    .flip-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .flip-front h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .flip-hint {
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      font-weight: 500;
+    }
+
+    .flip-back {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #b85b40 100%);
+      color: #fff;
+      transform: rotateY(180deg);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    /* Open When Selector */
+    .open-when-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: var(--shadow-warm);
+      text-align: center;
+    }
+
+    .mood-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .mood-pill {
+      background: var(--bg-peach);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mood-pill:hover, .mood-pill.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+
+    .mood-message {
+      background: var(--bg-cream);
+      border-radius: 16px;
+      padding: 24px;
+      font-family: 'Lora', serif;
+      font-size: 1.08rem;
+      color: var(--text-main);
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Virtual Hug Button */
+    .hug-section {
+      text-align: center;
+      padding: 36px 24px;
+      background: rgba(255, 253, 251, 0.7);
+      border-radius: 24px;
+      border: 1px dashed rgba(200, 109, 81, 0.35);
+    }
+
+    .hug-btn {
+      background: linear-gradient(135deg, var(--terracotta), var(--amber));
+      color: #fff;
+      border: none;
+      padding: 16px 34px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(200, 109, 81, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hug-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 14px 30px rgba(200, 109, 81, 0.38);
+    }
+
+    .hug-btn:active {
+      transform: scale(0.97);
+    }
+
+    .hug-feedback {
+      margin-top: 16px;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--terracotta-dark);
+      min-height: 28px;
+      font-size: 1.05rem;
+    }
+
+    .floating-heart {
+      position: fixed;
+      font-size: 1.6rem;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatHeart 2.4s ease-out forwards;
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      100% { transform: translateY(-160px) scale(1.4); opacity: 0; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 0 48px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bokeh-container">
+    <div class="bokeh"></div>
+    <div class="bokeh"></div>
+    <div class="bokeh"></div>
+  </div>
+
+  <div class="container">
+    <!-- Hero -->
+    <header>
+      <div class="badge">A Little Note Just For You</div>
+      <h1>Hey <span>Manu</span>, this is your reminder that you matter.</h1>
+      <p class="hero-sub">
+        Whenever the world feels a little too quiet or the road ahead feels blurry, come back here and read this.
+      </p>
+      <a href="#letter" class="scroll-btn">Read Your Letter ↓</a>
+    </header>
+
+    <!-- Main Sweet Letter -->
+    <section id="letter">
+      <div class="letter-card">
+        <div class="letter-greeting">Dear Manu,</div>
+        <div class="letter-body">
+          <p>
+            I don’t think I say this nearly enough, so I wanted to make a small space on the internet just for you—to say <strong>thank you</strong>.
+          </p>
+          <p>
+            Thank you for being there for me through everything so far. Through my highs and my lows, in moments when things were easy and in moments when life felt heavy, <span class="highlight">you never walked away</span>. You have one of the kindest, gentlest hearts I have ever known, and the way you care so genuinely makes this world a softer, safer place to be in.
+          </p>
+          <p>
+            I know there are days when loneliness sneaks up on you, even when you’re surrounded by people. And I know there are moments when you look at the future and feel overwhelmed because you don’t have everything figured out yet.
+          </p>
+          <p>
+            Please hear me when I say this: <strong>you don’t have to have all the answers right now.</strong> Not knowing what the future looks like doesn’t mean you’re lost—it just means your story is still unfolding. Take it one day, one breath, one small step at a time.
+          </p>
+          <p>
+            And on the days you feel lonely, remember that you are never truly alone. Just as you have always been there for me, <span class="highlight">I am right here in your corner</span>—rooting for you, appreciating you, and grateful every single day that you exist.
+          </p>
+        </div>
+
+        <div class="signature-block">
+          <div class="signature-closing">With all my gratitude and warmth,</div>
+          <div class="signature-name">Shelyna</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Flip Reminders -->
+    <section>
+      <h2 class="section-title">Things You Should Never Forget</h2>
+      <p class="section-desc">Tap any card whenever you need a small boost.</p>
+      <div class="cards-grid">
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">💛</div>
+              <h3>Your Kindness</h3>
+              <span class="flip-hint">Tap to open</span>
+            </div>
+            <div class="flip-back">
+              Your kindness isn’t unnoticed. Every small thing you do leaves a lasting warmth in the people lucky enough to know you—especially me.
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🧭</div>
+              <h3>About Your Future</h3>
+              <span class="flip-hint">Tap to open</span>
+            </div>
+            <div class="flip-back">
+              It’s completely okay not to have a 5-year plan. Some of the best chapters in life are written when you simply keep going with a good heart.
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🌙</div>
+              <h3>When You Feel Lonely</h3>
+              <span class="flip-hint">Tap to open</span>
+            </div>
+            <div class="flip-back">
+              Loneliness is a feeling, not a fact. You are deeply valued, thought of, and appreciated—even on your quietest nights.
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🤝</div>
+              <h3>Always In Your Corner</h3>
+              <span class="flip-hint">Tap to open</span>
+            </div>
+            <div class="flip-back">
+              You stood by me in both my happy and hard days. You never have to carry your heavy days all by yourself.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open When Section -->
+    <section>
+      <h2 class="section-title">Open When...</h2>
+      <p class="section-desc">Pick whatever matches how your heart feels right now.</p>
+      <div class="open-when-box">
+        <div class="mood-pills">
+          <button class="mood-pill active" onclick="showMood(0, this)">...you feel lonely</button>
+          <button class="mood-pill" onclick="showMood(1, this)">...you worry about the future</button>
+          <button class="mood-pill" onclick="showMood(2, this)">...you feel unappreciated</button>
+          <button class="mood-pill" onclick="showMood(3, this)">...you just need a smile</button>
+        </div>
+        <div class="mood-message" id="moodDisplay">
+          “Even when your room feels quiet, remember there is someone out there genuinely grateful that you’re in this world. Reach out anytime—you never bother me.”
+        </div>
+      </div>
+    </section>
+
+    <!-- Virtual Hug -->
+    <section class="hug-section">
+      <h2 class="section-title" style="margin-bottom: 8px;">Need a Little Warmth?</h2>
+      <p class="section-desc" style="margin-bottom: 22px;">Press the button below whenever you need a reminder that someone cares.</p>
+      <button class="hug-btn" onclick="sendHug(event)">Send a Virtual Hug 🤍</button>
+      <div class="hug-feedback" id="hugFeedback"></div>
+    </section>
+
+    <footer>
+      Made with warmth &amp; gratitude by <span>Shelyna</span> — for Manu.
+    </footer>
+  </div>
+
+  <script>
+    const moodMessages = [
+      "“Even when your room feels quiet, remember there is someone out there genuinely grateful that you’re in this world. Reach out anytime—you never bother me.”",
+      "“You don’t need to see the whole staircase to take the next step. Give yourself grace, Manu. Good things are still ahead of you, even if you can’t see them yet.”",
+      "“Thank you for every time you showed up, listened, and cared. Your presence alone has made a bigger difference in my life than words can ever explain.”",
+      "“Just a quick reminder: you are a genuinely wonderful human being, your smile makes days brighter, and the world is lucky to have you in it.”"
+    ];
+
+    function showMood(index, btn) {
+      document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const display = document.getElementById('moodDisplay');
+      display.style.opacity = 0;
+      setTimeout(() => {
+        display.textContent = moodMessages[index];
+        display.style.opacity = 1;
+      }, 180);
+    }
+
+    const hugNotes = [
+      "Sending you the biggest, warmest hug right now. 🤍",
+      "You’re doing better than you think, Manu. Deep breath. ✨",
+      "Thank you for being you. Always grateful for you! 💛",
+      "A gentle reminder: you are never alone in this. 🌿"
+    ];
+    let hugCount = 0;
+
+    function sendHug(e) {
+      const feedback = document.getElementById('hugFeedback');
+      feedback.textContent = hugNotes[hugCount % hugNotes.length];
+      hugCount++;
+
+      const emojis = ['🤍', '💛', '✨', '温暖', '🧡'];
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = ['🤍', '💛', '✨', '🧡'][Math.floor(Math.random() * 4)];
+        const offsetX = (Math.random() - 0.5) * 140;
+        heart.style.left = (e.clientX + offsetX) + 'px';
+        heart.style.top = (e.clientY - 10) + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2400);
+      }
+    }
+  </script>
+</body>
+</html>
